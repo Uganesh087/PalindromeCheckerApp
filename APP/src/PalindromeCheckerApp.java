@@ -1,28 +1,72 @@
+
+/*
+================================================================================================================
+MAIN CLASS - UseCase6QueueStackPalindromeApp
+================================================================================================================
+
+Use Case 6: Demonstration of FIFO vs LIFO using Queue and Stack
+
+Description:
+This class demonstrates the behavioral difference between
+Queue (FIFO – First In First Out) and
+Stack (LIFO – Last In First Out) using a Hardcoded String.
+
+At this stage, the application:
+- Starts execution from the main method
+- Displays a welcome message
+- Shows application Version
+- Stores a Hardcoded String
+- Enqueues characters into a Queue (FIFO)
+- Pushes characters into a Stack (LIFO)
+- Compares Dequeue (Queue) output with Pop (Stack) output
+- Validates Palindrome logic using structural behavior
+- Prints whether the String is Palindrome or Not
+
+Key Concepts:
+Queue – A linear data structure that follows the First In First Out (FIFO) principle.
+Enqueue & Dequeue Operations – Used to insert and remove elements from the queue.
+Stack – A linear data structure that follows the Last In First Out (LIFO) principle.
+Push & Pop Operations – Used to insert and remove elements from the stack.
+Logical Comparison – Matching dequeue (queue) output with pop (stack) output to validate palindrome logic.
+
+Data Structures Used: Queue, Stack
+
+@author 1346-pranav-io
+@version 6.0
+================================================================================================================
+*/
+
+import java.util.Queue;
+import java.util.LinkedList;
 import java.util.Stack;
 
 public class PalindromeCheckerApp
 {
     public static void main(String args[])
     {
-        System.out.println("Version: 5.0");
+        System.out.println("Welcome to The Palindrome Checker");
         String txt = "123321";
+        Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
+
         for(int i = 0; i < txt.length(); i++)
         {
+            queue.add(txt.charAt(i));
             stack.push(txt.charAt(i));
         }
 
-        String reversed = "";
+        boolean isPalindrome = true;
 
-        while(!stack.isEmpty())
+        while(!queue.isEmpty())
         {
-            reversed = reversed + stack.pop();
+            if(queue.remove() != stack.pop())
+            {
+                isPalindrome = false;
+                break;
+            }
         }
 
-        System.out.println("Original String: " + txt);
-        System.out.println("Reversed String: " + reversed);
-
-        if(txt.equals(reversed))
+        if(isPalindrome)
             System.out.println("The String " + txt + " is a Palindrome");
         else
             System.out.println("The String " + txt + " is Not a Palindrome");
